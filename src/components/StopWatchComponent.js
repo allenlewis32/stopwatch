@@ -97,7 +97,7 @@ function update() {
     result = '' + Math.floor(time / 60);
     if(result.length === 1) result = '0' + result;
     result += ':' + ('0' + Math.floor(time % 60)).slice(-2);
-    result += '.' + ('0' + Math.floor(time % 1 * 100) / 100).slice(-2);
+    result += '.' + ('0' + Math.floor(time % 1 * 100)).slice(-2);
     setDisplay(result);
 
     setSeconds(`rotate(${time % 60 * 6}deg)`);
