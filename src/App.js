@@ -3,7 +3,7 @@ import StopWatch from './components/StopWatchComponent';
 
 function App() {
   return (
-    <div class='main'>
+    <div className='main'>
       <StopWatch></StopWatch>
     </div>
   );

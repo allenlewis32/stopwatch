@@ -7,7 +7,7 @@ let state = 0; // 0 - stopped, 1 - running, 2 - paused
 let time = 0;
 
 function StopWatch() {
-    [display, setDisplay] = useState('00:00');
+    [display, setDisplay] = useState('00:00.00');
     return (
         <React.Fragment>
             <div className='stopwatch'>{display}</div>
@@ -28,9 +28,9 @@ function start() {
         }
         state = 1;
         interval = setInterval(() => {
-            time++;
+            time += 0.01;
             update();
-        }, 1000);
+        }, 10);
     }
 }
 
@@ -61,6 +61,7 @@ function update() {
     result = '' + Math.floor(time / 60);
     if(result.length === 1) result = '0' + result;
     result += ':' + ('0' + Math.floor(time % 60)).slice(-2);
+    result += '.' + ('0' + Math.floor(time % 1 * 100) / 100).slice(-2);
     setDisplay(result);
 }
 
