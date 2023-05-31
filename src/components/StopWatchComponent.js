@@ -5,6 +5,7 @@ let seconds, setSeconds;
 let minutes, setMinutes;
 let interval;
 let state, setState; // 0 - stopped, 1 - running, 2 - paused
+let laps, setLaps;
 
 let time = 0;
 
@@ -13,6 +14,7 @@ function StopWatch() {
     [seconds, setSeconds] = useState(0);
     [minutes, setMinutes] = useState(0);
     [state, setState] = useState(0);
+    [laps, setLaps] = useState([]);
     let secondHandStyle = {
         'transform':seconds
     };
@@ -39,16 +41,24 @@ function StopWatch() {
                 {state === 1 && <button type='button' onClick={pause}>Pause</button>}
                 {state !== 0 && <button type='button' onClick={stop}>Stop</button>}
                 {display !== '00:00.00' && <button type='button' onClick={reset}>Reset</button>}
-                <button type='button'>Lap</button>
+                <button type='button' onClick={addLap}>Lap</button>
             </div>
+            <ol>
+                {laps.map(e=><li>{e}</li>)}
+            </ol>
         </React.Fragment>
     );
+}
+
+function addLap() {
+    setLaps([...laps, display]);
 }
 
 function start() {
     if(state !== 1) {
         if(state === 0) {
             time = 0;
+            setLaps([]);
             update();
         }
         setState(1);
@@ -78,6 +88,7 @@ function stop() {
 function reset() {
     stop();
     time = 0;
+    setLaps([]);
     update();
 }
 
