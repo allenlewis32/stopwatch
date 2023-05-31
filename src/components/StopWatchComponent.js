@@ -13,7 +13,7 @@ function StopWatch() {
             <div className='stopwatch'>{display}</div>
             <button type='button' onClick={start}>Start</button>
             <button type='button' onClick={pause}>Pause</button>
-            <button type='button'>Stop</button>
+            <button type='button' onClick={stop}>Stop</button>
             <button type='button'>Lap</button>
         </React.Fragment>
     );
@@ -23,6 +23,7 @@ function start() {
     if(state != 1) {
         if(state == 0) {
             time = 0;
+            update();
         }
         state = 1;
         interval = setInterval(() => {
@@ -36,6 +37,15 @@ function pause() {
     if(state == 1) {
         state = 2;
         clearInterval(interval);
+    }
+}
+
+function stop() {
+    if(state != 0) {
+        if(state == 1) {
+            clearInterval(interval);
+        }
+        state = 0;
     }
 }
 
