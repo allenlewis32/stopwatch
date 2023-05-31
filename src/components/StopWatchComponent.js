@@ -86,7 +86,6 @@ function stop() {
 }
 
 function reset() {
-    stop();
     time = 0;
     setLaps([]);
     update();
